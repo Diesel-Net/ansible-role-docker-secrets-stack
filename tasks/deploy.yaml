@@ -1,0 +1,3 @@
+- name: "Executing deploy.py"
+  shell: "{{ app_data }}/docker_stack/venv/bin/python3 {{ app_data }}/docker_stack/deploy.py {{ app_data }}/docker_stack/docker-compose.yaml"
+  register: deploy
