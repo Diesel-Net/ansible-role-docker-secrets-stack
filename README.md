@@ -4,7 +4,7 @@ A very fancy call to "docker stack deploy" which makes docker configs and secret
 
 _docker_stack_deploy.yaml_
 ```yaml
-# ansible-playbook docker_stack_deploy.yaml -i inventories/dev/hosts --vault-id ~/.tokens/vault.txt
+# ansible-playbook docker_stack_deploy.yaml -i inventories/dev/hosts --vault-id ~/.tokens/master_id
 
 # 1. Copy requirements.txt
 # 2. Copy deploy.py
