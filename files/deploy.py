@@ -59,8 +59,6 @@ PRE_REQUIRED_VARS = [
     "DOCKER_REGISTRY_PASSWORD",
     "DOCKER_STACK",
 ]
-LOCK_FILENAME = "docker_commands.lock"
-LOCK_FILE = open(LOCK_FILENAME, 'w')
 
 def main():
     if len(argv) < 2:
@@ -184,7 +182,4 @@ def docker_stack_deploy(compose_file, env_vars):
     return proc.returncode
 
 if __name__ == "__main__":
-    fcntl.lockf(LOCK_FILE, fcntl.LOCK_EX)
-    exit_code = main()
-    fcntl.lockf(LOCK_FILE, fcntl.LOCK_UN)
-    exit(exit_code)
+    exit(main())
