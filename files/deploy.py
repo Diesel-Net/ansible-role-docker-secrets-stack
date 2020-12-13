@@ -98,7 +98,6 @@ def main():
     error = docker_login(env_vars)
     if error:
         print_ascii(COMMAND_ERROR, 0, 31, 40, file_stream=stderr)
-        return error
 
     print_ascii("[Deploying stack...]", 0, 36, 40)
     error = docker_stack_deploy(compose_file, env_vars)
@@ -185,15 +184,7 @@ def docker_stack_deploy(compose_file, env_vars):
     return proc.returncode
 
 if __name__ == "__main__":
-    # Grab the mutex
     fcntl.lockf(LOCK_FILE, fcntl.LOCK_EX)
-
-    # Run the critical section
     exit_code = main()
-    
-    # The below line is not necessary, due to cleanup routines,
-    # but is arguably more clear to leave it in.
     fcntl.lockf(LOCK_FILE, fcntl.LOCK_UN)
-
-    # Return any error codes to the caller (e.g. ansible)
     exit(exit_code)
