@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Thomas Daley
+  description: A more fully fledged "docker stack deploy" command
+
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 18.04
+
+  galaxy_tags:
+    - swarm
+    - ubuntu
+    - docker
+    - stack
+    - deploy
+
+dependencies: []

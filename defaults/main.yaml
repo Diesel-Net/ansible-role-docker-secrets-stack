@@ -1,0 +1,6 @@
+---
+# defaults file for docker-stack
+
+user: automation
+home: "/home/{{ user }}"
+app_data: "{{ home }}/.diesel"

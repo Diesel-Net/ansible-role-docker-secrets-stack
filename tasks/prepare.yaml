@@ -1,0 +1,40 @@
+- name: "Ensuring exisitence of configuration directory: {{ app_data }}/{{ role_name }}"
+  command: mkdir -p {{ app_data }}/{{ role_name }}
+  args:
+    warn: no
+  become: yes
+  become_user: "{{ user }}"
+
+- name: "Syncing {{ source }} with {{ app_data }}/{{ role_name }}/{{ source | basename }}"
+  synchronize:
+    src: "{{ source }}"
+    dest: "{{ app_data }}/{{ role_name }}"
+    recursive: yes
+    delete: yes
+  vars:
+    source: requirements.txt
+
+- name: "Syncing {{ source }} with {{ app_data }}/{{ role_name }}/{{ source | basename }}"
+  synchronize:
+    src: "{{ source }}"
+    dest: "{{ app_data }}/{{ role_name }}"
+    recursive: yes
+    delete: yes
+  vars:
+    source: deploy.py
+
+- name: "Rendering {{ source }} to {{ app_data }}/{{ role_name }}/{{ out }}"
+  template:
+    src: "{{ source }}"
+    dest: "{{ app_data }}/{{ role_name }}/{{ out }}"
+  become: yes
+  become_user: "{{ user }}"
+  vars:
+    source: docker-compose.yaml.j2
+    out: docker-compose.yaml
+
+- name: "Create python venv"
+  shell: "python3 -m venv {{ app_data }}/{{ role_name }}/venv"
+
+- name: "Install pip packages to venv"
+  shell: "{{ app_data }}/{{ role_name }}/venv/bin/pip3 install -r {{ app_data }}/{{ role_name }}/requirements.txt"
