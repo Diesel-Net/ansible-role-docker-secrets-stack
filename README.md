@@ -1,4 +1,4 @@
-# ansible-role-docker-stack
+# ansible-role-docker-secrets-stack
 
 A very fancy call to "docker stack deploy" which makes docker configs and secrets management almost mindless. See below for an example playbook. The key to this role is in [deploy.py](files/deploy.py)
 
@@ -27,7 +27,7 @@ _docker_stack_deploy.yaml_
 
     - name: Run `docker stack deploy` command
       include_role:
-        name: docker_stack
+        name: docker_secrets_stack
         tasks_from: deploy
 
 ```
